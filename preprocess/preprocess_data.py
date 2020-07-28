@@ -55,15 +55,15 @@ def encode_sp(lines_fr, lines_en, fout, sp_model):
 if args.lower_case:
     os.system("cat {0} {1} > all.{2}.txt".format(fr_file, en_file, lang))
     os.system(
-        "perl mosesdecoder/scripts/tokenizer/lowercase.perl < all.{0}.txt > all.{0}.lc.txt".format(lang))
+        "perl ../mosesdecoder/scripts/tokenizer/lowercase.perl < all.{0}.txt > all.{0}.lc.txt".format(lang))
     spm.SentencePieceTrainer.Train(
-        '--input=all.{0}.lc.txt --model_prefix=all.{0}.lc.sp.50k --vocab_size=50000 --character_coverage=0.99 --hard_vocab_limit=false --input_sentence_size=10000000'.format(
+        '--input=all.{0}.lc.txt --model_prefix=all.{0}.lc.sp.50k --vocab_size=50000 --character_coverage=0.995 --hard_vocab_limit=false --input_sentence_size=10000000'.format(
             lang))
     encode_sp(lines_fr, lines_en, "train-{0}-en-all-tok-lc.txt".format(lang),
               'all.{0}.lc.sp.50k.model'.format(lang))
 else:
     os.system("cat {0} {1} > all.{2}.txt".format(fr_file, en_file, lang))
     spm.SentencePieceTrainer.Train(
-        '--input=all.{0}.txt --model_prefix=all.{0}.sp.50k --vocab_size=50000 --character_coverage=0.9995 --hard_vocab_limit=false --input_sentence_size=10000000'.format(
+        '--input=all.{0}.txt --model_prefix=all.{0}.sp.50k --vocab_size=50000 --character_coverage=0.995 --hard_vocab_limit=false --input_sentence_size=10000000'.format(
             lang))
     encode_sp(lines_fr, lines_en, "train-{0}-en-all-tok.txt".format(lang), 'all.{0}.sp.50k.model'.format(lang))

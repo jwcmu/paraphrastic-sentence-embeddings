@@ -8,7 +8,7 @@ The code is written in Python 3.7 and requires H5py, jieba, numpy, scipy, senten
 
 To get started, download the data files used for training from http://www.cs.cmu.edu/~jwieting and download the STS evaluation data:
 
-    wget http://www.cs.cmu.edu/~jwieting/paraphrase-at-scale.zip
+    wget http://phontron.com/data/paraphrase-at-scale.zip
     unzip paraphrase-at-scale.zip
     rm paraphrase-at-scale.zip
     wget http://www.cs.cmu.edu/~jwieting/STS.zip .
@@ -31,8 +31,8 @@ To train sp-average models in Arabic-English on GPU:
 
 To embed a list of sentences:
 
-    python embed_sentences.py --sentence-file paraphrase-at-scale/example-sentences.txt --load-file paraphrase-at-scale/model.para.lc.100.pt  --sp-model paraphrase-at-scale/paranmt.model --output-file sentence-output
+    python embed_sentences.py --sentence-file paraphrase-at-scale/example-sentences.txt --load-file paraphrase-at-scale/model.para.lc.100.pt  --sp-model paraphrase-at-scale/paranmt.model --output-file sentence_embeds.np
     
 To score a list of sentence pairs:
 
-    python score_sentences.py paraphrase-at-scale/example-sentence-pairs.txt --load-file paraphrase-at-scale/model.para.lc.100.pt  --sp-model paraphrase-at-scale/paranmt.model
+    python score_sentence_pairs.py --sentence-pair-file paraphrase-at-scale/example-sentences-pairs.txt --load-file paraphrase-at-scale/model.para.lc.100.pt  --sp-model paraphrase-at-scale/paranmt.model

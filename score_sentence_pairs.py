@@ -67,7 +67,7 @@ def evaluate(args, model):
                      params=args, model=model, lower_case=model.args.lower_case,
                      tokenize=model.args.tokenize)
     s = FileSim()
-    scores = s.score(new_args, batcher, args.sim_file)
+    scores = s.score(new_args, batcher, args.sentence_pair_file)
 
     f = open(args.sentence_pair_file, 'r')
     lines = f.readlines()
@@ -86,4 +86,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     model, _ = load_model(None, args)
+    model.eval()
     evaluate(args, model)

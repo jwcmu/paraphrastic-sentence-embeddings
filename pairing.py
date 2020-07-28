@@ -5,6 +5,7 @@ from utils import BigExample
 def get_pairs_batch(model, g1, g1_lengths, g2, g2_lengths):
     with torch.no_grad():
 
+        model.eval()
         all_g1_lengths = torch.cat(g1_lengths)
         all_g2_lengths = torch.cat(g2_lengths)
 
@@ -78,6 +79,7 @@ def get_pairs_batch(model, g1, g1_lengths, g2, g2_lengths):
             _p2.append(p2[i][:,0:max(p2_lengths[i])])
         p2 = _p2
 
+        model.train()
         return p1, p1_lengths, p2, p2_lengths
 
 def compute_loss_one_batch(model):

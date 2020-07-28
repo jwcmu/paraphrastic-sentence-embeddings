@@ -9,7 +9,6 @@ import utils
 from torch.nn.modules.distance import CosineSimilarity
 from torch.nn.utils.rnn import pad_packed_sequence as unpack
 from torch.nn.utils.rnn import pack_padded_sequence as pack
-from evaluate import evaluate
 from evaluate_sts import evaluate_sts
 from torch import optim
 
@@ -142,7 +141,6 @@ class ParaModel(nn.Module):
         self.curr_idx = 0
 
         self.eval()
-        evaluate(self, self.args)
         evaluate_sts(self, self.args)
         self.train()
 
@@ -177,7 +175,6 @@ class ParaModel(nn.Module):
                     self.optimizer.step()
 
                 self.eval()
-                evaluate(self, self.args)
                 evaluate_sts(self, self.args)
                 self.train()
 
@@ -230,7 +227,7 @@ class Averaging(ParaModel):
             word_embs = self.embedding(idxs)
 
         if self.dropout > 0:
-            F.dropout(word_embs, training=self.training)
+            word_embs = F.dropout(word_embs, training=self.training)
 
         if self.pool == "max":
             word_embs = utils.max_pool(word_embs, lengths, self.args.gpu)
@@ -279,12 +276,12 @@ class LSTM(ParaModel):
 
         if fr and not self.share_encoder:
             if self.dropout > 0:
-                F.dropout(in_embs, training=self.training)
+                in_embs = F.dropout(in_embs, training=self.training)
             all_hids, (enc_last_hid, _) = self.lstm_fr(pack(in_embs[indices],
                                                         lens.tolist(), batch_first=True), (e_hidden_init, e_cell_init))
         else:
             if self.dropout > 0:
-                F.dropout(in_embs, training=self.training)
+                in_embs = F.dropout(in_embs, training=self.training)
             all_hids, (enc_last_hid, _) = self.lstm(pack(in_embs[indices],
                                                          lens.tolist(), batch_first=True), (e_hidden_init, e_cell_init))
 
