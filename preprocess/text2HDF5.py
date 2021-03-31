@@ -14,7 +14,7 @@ for i in lines:
     i = i.strip()
     i = i.split('\t')
     #lis.append(i)
-    if len(i) != 2:
+    if len(i) != int(sys.argv[2]):
         continue
     arr = i[0].split() + i[1].split()
     for j in arr:
@@ -24,7 +24,7 @@ for i in lines:
 for i in lines:
     i = i.strip()
     i = i.split('\t')
-    if len(i) != 2:
+    if len(i) != int(sys.argv[2]):
         continue
     arr = i[0].split()
     s1 = []

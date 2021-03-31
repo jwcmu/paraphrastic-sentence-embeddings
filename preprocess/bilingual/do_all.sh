@@ -16,7 +16,7 @@ langs=$(echo $1 | tr "-" "\n")
 for l in $langs
 do
     python -u preprocess_data.py --lang $l --dir en-$l
-    python -u text2HDF5.py train-$l-en-all-tok-lc.txt
+    python -u ../../text2HDF5.py train-$l-en-all-tok-lc.txt 2
 done
 
 rm -Rf en-*
