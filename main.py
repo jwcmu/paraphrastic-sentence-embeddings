@@ -1,12 +1,9 @@
-import utils
 import random
 import numpy as np
 import sys
 import argparse
-import io
 import torch
 from models import Averaging, LSTM, load_model
-from utils import Example
 from utils import unk_string
 import h5py
 
@@ -33,6 +30,7 @@ parser.add_argument("--pool", default="mean", choices=["mean", "max"], help="typ
 parser.add_argument("--zero-unk", default=1, type=int, help="whether to ignore unknown tokens")
 parser.add_argument("--load-file", help="filename to load a pretrained model.")
 parser.add_argument("--save-every-epoch", default=0, type=int, help="whether to save a checkpoint every epoch")
+parser.add_argument("--save-final", type=int, default=0, help="save final model")
 parser.add_argument("--outfile", default="model", help="output file name")
 parser.add_argument("--hidden-dim", default=150, type=int, help="hidden dim size of LSTM")
 parser.add_argument("--delta", default=0.4, type=float, help="margin")
@@ -44,7 +42,6 @@ parser.add_argument("--sp-model", help="SP model to load for evaluation")
 parser.add_argument("--lower-case", type=int, default=1, help="whether to lowercase eval data")
 parser.add_argument("--tokenize", type=int, default=0, help="whether to tokenize eval data")
 parser.add_argument("--debug", type=int, default=0, help="debug mode")
-parser.add_argument("--save-interval", type=int, default=0, help="debug mode")
 
 args = parser.parse_args()
 

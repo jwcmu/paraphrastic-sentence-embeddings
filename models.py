@@ -20,9 +20,10 @@ def load_model(data, args):
     vocab = model['vocab']
     vocab_fr = model['vocab_fr']
     optimizer = model['optimizer']
-    epoch = model['epoch']
+    epoch = model['epoch'] + 1
 
     model_args.sp_model = args.sp_model
+    model_args.megabatch_anneal = args.megabatch_anneal
 
     if model_args.model == "avg":
         model = Averaging(data, model_args, vocab, vocab_fr)
@@ -164,7 +165,6 @@ class ParaModel(nn.Module):
                     if self.save_interval > 0 and counter > 0:
                         if counter % self.save_interval == 0:
                             self.eval()
-                            evaluate(self, self.args)
                             evaluate_sts(self, self.args)
                             self.train()
                             self.save_params(ep, counter=counter)
@@ -185,6 +185,9 @@ class ParaModel(nn.Module):
 
         except KeyboardInterrupt:
             print("Training Interrupted")
+
+        if self.args.save_final:
+            self.save_params(ep)
 
         end_time = time.time()
         print("Total Time:", (end_time - start_time))
@@ -227,7 +230,7 @@ class Averaging(ParaModel):
             word_embs = self.embedding(idxs)
 
         if self.dropout > 0:
-            word_embs = F.dropout(word_embs, training=self.training)
+            word_embs = F.dropout(word_embs, p=self.dropout, training=self.training)
 
         if self.pool == "max":
             word_embs = utils.max_pool(word_embs, lengths, self.args.gpu)
@@ -276,12 +279,12 @@ class LSTM(ParaModel):
 
         if fr and not self.share_encoder:
             if self.dropout > 0:
-                in_embs = F.dropout(in_embs, training=self.training)
+                in_embs = F.dropout(in_embs, p=self.dropout, training=self.training)
             all_hids, (enc_last_hid, _) = self.lstm_fr(pack(in_embs[indices],
                                                         lens.tolist(), batch_first=True), (e_hidden_init, e_cell_init))
         else:
             if self.dropout > 0:
-                in_embs = F.dropout(in_embs, training=self.training)
+                in_embs = F.dropout(in_embs, p=self.dropout, training=self.training)
             all_hids, (enc_last_hid, _) = self.lstm(pack(in_embs[indices],
                                                          lens.tolist(), batch_first=True), (e_hidden_init, e_cell_init))
 
