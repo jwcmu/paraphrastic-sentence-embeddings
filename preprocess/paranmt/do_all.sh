@@ -16,7 +16,9 @@ fi
 
 if [ ! -f "para-nmt-50m.txt" ]
 then
-    bash download_paranmt.sh
+    wget http://phontron.com/data/para-nmt-50m.zip
+    unzip para-nmt-50m.zip
+    rm para-nmt-50m.zip
 fi
 
 if [ ! -f "scratch/para-nmt-50m-labeled.txt" ]

@@ -1,6 +1,6 @@
 # Paraphrastic Representations at Scale
 
-Code to train models from "Paraphrase Representations at Scale".
+Code to train models from "Paraphrastic Representations at Scale".
 
 The code is written in Python 3.7 and requires H5py, jieba, numpy, scipy, sentencepiece, sacremoses, and PyTorch >= 1.0 libraries. These can be insalled with the following command:
 
@@ -32,3 +32,5 @@ To embed a list of sentences:
 To score a list of sentence pairs:
 
     python score_sentence_pairs.py --sentence-pair-file paraphrase-at-scale/example-sentences-pairs.txt --load-file paraphrase-at-scale/model.para.lc.100.pt  --sp-model paraphrase-at-scale/paranmt.model
+
+To download and preprocess raw data for training models (both bilingual and ParaNMT), see preprocess/bilingual and preprocess/paranmt.
