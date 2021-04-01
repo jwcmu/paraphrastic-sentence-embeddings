@@ -1,4 +1,3 @@
-
 import sys
 import numpy as np
 import h5py
@@ -13,7 +12,6 @@ vocab = OrderedDict()
 for i in lines:
     i = i.strip()
     i = i.split('\t')
-    #lis.append(i)
     if len(i) != int(sys.argv[2]):
         continue
     arr = i[0].split() + i[1].split()

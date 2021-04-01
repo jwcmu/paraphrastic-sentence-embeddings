@@ -1,5 +1,6 @@
 import argparse
 import random
+
 random.seed(1)
 
 parser = argparse.ArgumentParser()

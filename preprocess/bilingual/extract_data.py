@@ -5,8 +5,6 @@ from os import path
 def extract(lang):
 
     dir = "en-{0}".format(lang)
-    os.system("rm {0}/en.txt".format(dir))
-    os.system("rm {0}/fr.txt".format(dir))
 
     key = "en-{0}".format(lang)
     if lang < "en":
@@ -20,7 +18,7 @@ def extract(lang):
         os.system("paste {0} {1} > {2}/paste.ep.txt".format(f_en, f_fr, dir))
         os.system("sort {0}/paste.ep.txt | uniq -u > {0}/sort.ep.txt".format(dir))
         os.system("shuf {0}/sort.ep.txt > {0}/shuf.ep.txt".format(dir))
-        os.system("python filter_length.py {0}/shuf.ep.txt {0}/shuf.clean.ep.txt".format(dir))
+        os.system("python ../filter_length.py {0}/shuf.ep.txt {0}/shuf.clean.ep.txt".format(dir))
         os.system("/bin/bash -c \"cut -f 1 {0}/shuf.clean.ep.txt >> {0}/en.txt\"".format(dir))
         os.system("/bin/bash -c \"cut -f 2 {0}/shuf.clean.ep.txt >> {0}/fr.txt\"".format(dir))
 
@@ -30,7 +28,7 @@ def extract(lang):
         os.system("paste {0} {1} > {2}/paste.os.txt".format(f_en, f_fr, dir))
         os.system("sort {0}/paste.os.txt | uniq -u > {0}/sort.os.txt".format(dir))
         os.system("shuf {0}/sort.os.txt > {0}/shuf.os.txt".format(dir))
-        os.system("python filter_length.py {0}/shuf.os.txt {0}/shuf.clean.os.txt".format(dir))
+        os.system("python ../filter_length.py {0}/shuf.os.txt {0}/shuf.clean.os.txt".format(dir))
         os.system("/bin/bash -c \"cut -f 1 {0}/shuf.clean.os.txt | head -n 4000000 >> {0}/en.txt\"".format(dir))
         os.system("/bin/bash -c \"cut -f 2 {0}/shuf.clean.os.txt | head -n 4000000 >> {0}/fr.txt\"".format(dir))
 
@@ -40,7 +38,7 @@ def extract(lang):
         os.system("paste {0} {1} > {2}/paste.tz.txt".format(f_en, f_fr, dir))
         os.system("sort {0}/paste.tz.txt | uniq -u > {0}/sort.tz.txt".format(dir))
         os.system("shuf {0}/sort.tz.txt > {0}/shuf.tz.txt".format(dir))
-        os.system("python filter_length.py {0}/shuf.tz.txt {0}/shuf.clean.tz.txt".format(dir))
+        os.system("python ../filter_length.py {0}/shuf.tz.txt {0}/shuf.clean.tz.txt".format(dir))
         os.system("/bin/bash -c \"cut -f 1 {0}/shuf.clean.tz.txt >> {0}/en.txt\"".format(dir))
         os.system("/bin/bash -c \"cut -f 2 {0}/shuf.clean.tz.txt >> {0}/fr.txt\"".format(dir))
 
@@ -50,7 +48,7 @@ def extract(lang):
         os.system("paste {0} {1} > {2}/paste.gv.txt".format(f_en, f_fr, dir))
         os.system("sort {0}/paste.gv.txt | uniq -u > {0}/sort.gv.txt".format(dir))
         os.system("shuf {0}/sort.gv.txt > {0}/shuf.gv.txt".format(dir))
-        os.system("python filter_length.py {0}/shuf.gv.txt {0}/shuf.clean.gv.txt".format(dir))
+        os.system("python ../filter_length.py {0}/shuf.gv.txt {0}/shuf.clean.gv.txt".format(dir))
         os.system("/bin/bash -c \"cut -f 1 {0}/shuf.clean.gv.txt >> {0}/en.txt\"".format(dir))
         os.system("/bin/bash -c \"cut -f 2 {0}/shuf.clean.gv.txt >> {0}/fr.txt\"".format(dir))
 
@@ -61,7 +59,7 @@ def extract(lang):
             os.system("paste {0} {1} > {2}/paste.un.txt".format(f_en, f_fr, dir))
             os.system("sort {0}/paste.un.txt | uniq -u > {0}/sort.un.txt".format(dir))
             os.system("shuf {0}/sort.un.txt > {0}/shuf.un.txt".format(dir))
-            os.system("python filter_length.py {0}/shuf.un.txt {0}/shuf.clean.un.txt".format(dir))
+            os.system("python ../filter_length.py {0}/shuf.un.txt {0}/shuf.clean.un.txt".format(dir))
             os.system("/bin/bash -c \"cut -f 1 {0}/shuf.clean.un.txt | head -n 4000000 >> {0}/en.txt\"".format(dir))
             os.system("/bin/bash -c \"cut -f 2 {0}/shuf.clean.un.txt | head -n 4000000 >> {0}/fr.txt\"".format(dir))
             if lang == "ar":
@@ -69,7 +67,7 @@ def extract(lang):
                           "multi.zero.all.txt\"".format(dir))
 
     if lang == "zh":
-        os.system("python jieba_tokenize.py {0}/fr.txt".format(dir))
+        os.system("python ../jieba_tokenize.py {0}/fr.txt".format(dir))
 
     if lang == "es":
         os.system("cat {0}/en.txt >> multi.zero.all.txt".format(dir))

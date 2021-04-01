@@ -1,4 +1,3 @@
-import sentencepiece as spm
 import argparse
 import numpy as np
 from sacremoses import MosesTokenizer

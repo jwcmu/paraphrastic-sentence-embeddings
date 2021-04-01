@@ -1,12 +1,9 @@
-import sentencepiece as spm
 import argparse
 import numpy as np
 from sacremoses import MosesTokenizer
 from models import load_model
 from utils import Example
 import time
-
-#python -u evaluate_list.py --load-file model.lc.100_1.pt  --sp-model ../all.fr.lc.sp.30k.model --sim-file /projects/tir5/users/jwieting/data/analysis/sentences.txt
 
 def buffered_read(fp, buffer_size):
     buffer = []

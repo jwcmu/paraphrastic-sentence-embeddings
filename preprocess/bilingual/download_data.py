@@ -22,6 +22,7 @@ def download_for_lang(lang):
     cmd = "mkdir en-{0}".format(lang)
     os.system(cmd)
 
+    """
     #download os
     if first:
         exists = check_site_exist("http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/moses/{0}-en.txt.zip".format(lang))
@@ -79,7 +80,7 @@ def download_for_lang(lang):
         os.system(cmd)
         cmd = "unzip -d en-{0}/un/ en-{0}.un.txt.zip".format(lang)
         os.system(cmd)
-
+    """
     #download global voices
     if first:
         exists = check_site_exist("http://opus.nlpl.eu/download.php?f=GlobalVoices/v2017q3/moses/{0}-en.txt.zip".format(lang))
