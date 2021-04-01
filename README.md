@@ -25,10 +25,6 @@ If you use our code, models, or data for your work please cite:
         year={2019}
     }
 
-To train sp-average models in Arabic-English on GPU:
-    
-    python main.py --data-file paraphrase-at-scale/train-ar-en-all-tok-lc.h5 --outfile model.ar.lc.100 --lower-case 1 --tokenize 0  --model avg --dim 1024 --epochs 10 --dropout 0.3  --megabatch-size 100 --save-every-epoch 1 --save-interval 50000 --sp-model paraphrase-at-scale/all.ar.lc.sp.50k.model --vocab-file paraphrase-at-scale/train-ar-en-all-tok-lc.vocab 
-
 To embed a list of sentences:
 
     python embed_sentences.py --sentence-file paraphrase-at-scale/example-sentences.txt --load-file paraphrase-at-scale/model.para.lc.100.pt  --sp-model paraphrase-at-scale/paranmt.model --output-file sentence_embeds.np

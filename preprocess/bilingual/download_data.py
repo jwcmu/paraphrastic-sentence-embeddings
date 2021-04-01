@@ -93,8 +93,6 @@ def download_for_lang(lang):
         cmd = "unzip -d en-{0}/gv/ en-{0}.gv.txt.zip".format(lang)
         os.system(cmd)
 
-#langs = ["fr", "de", "ru", "zh", "ar", "es", "tr"]
-
 if len(sys.argv) == 1:
     langs = ["fr", "de", "ru", "zh", "ar", "es", "tr"]
 else:
